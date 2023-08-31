@@ -1,6 +1,6 @@
 <?php
 require_once "myDatabase.php";
-
+                               
 if(isset($_POST["blogSubmit"])) {
     // Get the submitted form data
     $authorName = $_POST['authorName'];
