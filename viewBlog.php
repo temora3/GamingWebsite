@@ -35,8 +35,8 @@
             <div class="socialLinks">
                 <div class="BtnDiv">
                     <button class="BtnSocial" style="background: linear-gradient(45deg,#822300,#d43901,#c10043,#ee0053,#ee0053);">
-                        <a href="writeBlog.html" class="signSocial"><img src="Images/bxs-edit.svg" alt=""></a>
-                        <a href="writeBlog.html" class="text">Write Blog</a>
+                        <a href="writeBlog.php" class="signSocial"><img src="Images/bxs-edit.svg" alt=""></a>
+                        <a href="writeBlog.php" class="text">Write Blog</a>
                     </button>
                 </div>
             </div>
