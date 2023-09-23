@@ -1,13 +1,59 @@
-*{
+* {
+    font-family: Poppins;
     margin: 0;
     padding: 0;
-    font-family: Poppins;
 }
+.bodyStyle{
+    background: url(../Images/glassEffect.png);
+    background-repeat: no-repeat;
+    background-size:cover;
+    font-family: Montserrat;
+}
+.content-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.content-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+.content-table th,
+.content-table td {
+    padding: 12px 15px;
+}
+
+.content-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.content-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.content-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.content-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+
 #contactStyling{
     display: flex;
     justify-content: center;
     align-content: center;
-    min-height: 100vh;
+    min-height: 80vh;
     font-family: Poppins;
   }
   
@@ -21,25 +67,23 @@
     justify-content: center;
     align-items: center;
     padding-left: 5px;
-    
   }
 
   .editContainer{
     position: relative;
     width: 100%;
-    height: 135vh;
+    height: 100vh;
     background: url(../Images/glassEffect.png);
     background-size: cover;
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 0px;
   }
   
   .item{
     width: 100%;
-    height: 720px;
+    height: 510px;
     max-width: 900px;
     background: #ffffff;
     border-radius: 20px;
@@ -48,6 +92,7 @@
     grid-template-columns: none;
     display: grid;
     z-index:50;
+    margin-right: 250px;
   }
   
   .contact{
@@ -55,7 +100,7 @@
   }
   
   .submitForm{
-    background: linear-gradient(135deg,#822300,#d43901,#c10043,#ee0053,#ee0053);
+    background: linear-gradient(145deg,#002582,#00ffd0);
   }
   .first-text{
     color: #ffffff;
@@ -193,8 +238,10 @@
   .thirdText{
     font-size: 25px;
     position: relative;
+    justify-content: center;
+    align-items: center;
     top: 10px;
-    left: 20px;
+    left: 25vw;
     padding-top: 10px;
     background: linear-gradient(45deg,#00ffaa,#00ffaa,#ff0505,#ed006b,#ed006b,#ed006b,#ed006b,#ed006b,#ed006b,#ed006b,#ed006b,#ed006b);
     background-clip: text;
@@ -270,6 +317,7 @@
   }
   
   .input-box .input:focus ~ label,
+  .input-box .input:read-only ~ label,
   .input-box .input:valid ~ label{
     top: -10px;
     left: 10px;
@@ -286,7 +334,8 @@
   }
   .btnSubmit{
     position: relative;
-    top: -250px;
+    top: 20px;
+    left: 270px;
     background: #ffffff;
     outline: none;
     border: none;
@@ -378,8 +427,8 @@
   .navbar .dropdown ul {
     display: block;
     position: absolute;
-    width: 210px;
-    left: -145px;
+    width: 260px;
+    left: -135px;
     top: calc(100% + 30px);
     margin: 0;
     padding: 10px 0;
@@ -572,5 +621,3 @@
   }
   
   /* End of mobile */
-
-  

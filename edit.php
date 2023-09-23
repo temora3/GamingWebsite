@@ -1,53 +1,50 @@
 <?php
   session_start();
-  require_once "includes/dbConnect.php";
+  require_once "database/myDatabase.php";
+  if(isset($_GET["userID"])){
+    $userId = $_GET["userID"];
+    $spot_user = "SELECT * FROM userDetails LEFT JOIN roles USING (roleId) WHERE userDetails.userId=$userId";
+    $res = $conn->query($spot_user);
+    $row_spot_user = $res->fetch_assoc();
+  }
 ?>
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
         <meta charset="utf-8">
         <title>Blog create section</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="Css/write.css">
+        <link rel="stylesheet" href="Css/usersTable.css">
     </head>
-    <body id="contactStyling">
-        <div class="contactContainer">
+    <body id="contactStyling" style="background-image: url(../Images/glassEffect.png);">
+        <div class="editContainer">
             <div class="item">
             <div class="submitForm">
-                    <h4 class="thirdText">Blog Creation Form</h4>
-                <form action="database/blogProccess.php" class="formStyling" enctype="multipart/form-data" method="post">
+                    <h4 class="thirdText">Edit <?php print $row_spot_user["userName"];?>'s Data</h4>
+                <form action="database/update.php" class="formStyling" enctype="multipart/form-data" method="post">
                     <div class="input-box">
-                        <input type="text" class="input" name="authorName" required>
-                        <label for="">Author Name</label>
-                    </div>
-
-                    <div class="input-box">
-                        <input type="text" class="input" name="blogTitle" required>
-                        <label for="">Blog Title</label>
+                        <input type="text" class="input" name="userName" value="<?php print $row_spot_user["userName"];?>" required>
+                        <label for="">userName</label>
                     </div>
 
                     <div class="input-box">
-                        <input type="text" class="input" name="blogSubtitle" required>
-                        <label for="">Blog Subtitle</label>
+                        <input type="text" class="input" name="userEmail" value="<?php print $row_spot_user["userEmail"];?>"required>
+                        <label for="">userEmail</label>
                     </div>
 
                     <div class="input-box">
-                        <input type="text" name="blogText" class="input" required cols="30" rows="10"></input>
-                        <label for="">Text</label>
+                        <input type="text" class="input" name="userID" value="<?php print $row_spot_user["userID"];?>" required readonly>
+                        <label for="">userID</label>
                     </div>
 
-                    <div class="inputFile-box">
-                        <input type="file" name="blogImage" id="blogImageUpload" class="inputFile" required>
-                        <label for="">Blog Image</label>
+                    <div class="input-box">
+                        <input type="text" class="input" name="role" value="<?php print $row_spot_user["role"];?>" required readonly>
+                        <label for="">role</label>
                     </div>
 
-                    <div class="inputFile-box" style="left: 400px; top: -273px;">
-                        <input type="file" name="authorImage" id="authorImageUpload" class="inputFile" required>
-                        <label for="">Author Image</label>
-                    </div>
-
-                    <input type="submit" class="btnSubmit" value="Upload Blog" style="font-family: Poppins;" name="blogSubmit" id="blogSubmit">
+                    <input type="submit" class="btnSubmit" value="Confirm Edit" style="font-family: Poppins;" name="update" id="update">
                 </form>
                 </div>
             </div>
@@ -60,14 +57,13 @@
                         <li><a href="signUp.php"><strong>Sign Up</strong></a></li>
                         <li><a href="signIn.php"><strong>Sign In</strong></a></li>
                         <li><a href="FAQ.php"><strong>FAQ</strong></a></li>
-                        <?php  
-                        if(isset($_SESSION['role']) && $_SESSION['role'] == "Admin")
-                        {?>
-                            <li><a href="viewUsers.php"><strong>View Users</strong></a></li>
-                        <?php
-                        }else{
-                        }
-                        ?>
+                        <?php  if(isset($_SESSION['role']) && $_SESSION['role'] == "Admin")
+                            {?>
+                                <li><a href="viewUsers.php"><strong>View Users</strong></a></li>
+                            <?php
+                            }else{
+                            }
+                            ?>
                         <li class="dropdown"><i class="bi bi-chevron-right"></i><script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                             <lord-icon 
                                 src="https://cdn.lordicon.com/hbvyhtse.json"
@@ -90,7 +86,7 @@
                             </ul>
                         </li>
                     </ul>
-                <div class="dropdown mobile-nav-toggle" style="top: 40px;"><img src="Images/menu.svg" alt="Menu"/> 
+                <div class="dropdown mobile-nav-toggle" style="top: 40px; right: 70px;"><img src="Images/menu.svg" alt="Menu"/> 
                     <ul style="font-family: Poppins;">
                         <li><a href="index.php">Home</a></li>
                         <li><a href="viewBlog.php">Blog</a></li>
@@ -98,17 +94,17 @@
                         <li><a href="signUp.php">Sign Up</a></li>
                         <li><a href="signIn.php">Sign In</a></li>
                         <li><a href="FAQ.php">FAQ</a></li>
-                        <?php  
-                        if(isset($_SESSION['role']) && $_SESSION['role'] == "Admin")
-                        {?>
-                            <li><a href="viewUsers.php">View Users</a></li>
-                        <?php
-                        }else{
-                        }
-                        ?>
+                        <?php  if(isset($_SESSION['role']) && $_SESSION['role'] == "Admin")
+                            {?>
+                                <li><a href="viewUsers.php">View Users</a></li>
+                            <?php
+                            }else{
+                            }
+                            ?>
+                    </ul>
                   </div>
 
-                <div class="dropdown mobile-nav-toggle" style="top: 40px; right: 100px;"><script src="https://cdn.lordicon.com/bhenfmcm.js"></script> 
+                <div class="dropdown mobile-nav-toggle" style="top: 40px; right: 200px;"><script src="https://cdn.lordicon.com/bhenfmcm.js"></script> 
                     <li class="dropdown"><i class="bi bi-chevron-right"></i>
                         <lord-icon 
                             src="https://cdn.lordicon.com/hbvyhtse.json"

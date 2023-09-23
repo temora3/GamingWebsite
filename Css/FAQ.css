@@ -228,8 +228,8 @@ section {
   .navbar .dropdown ul {
     display: block;
     position: absolute;
-    width: 200px;
-    left: -135px;
+    width: 250px;
+    left: -180px;
     top: calc(100% + 30px);
     margin: 0;
     padding: 10px 0;

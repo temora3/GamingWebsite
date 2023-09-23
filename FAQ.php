@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,6 +20,35 @@
                     <li><a href="testimonials.php"><strong>Testimonials</strong></a></li>
                     <li><a href="signUp.php"><strong>Sign Up</strong></a></li>
                     <li><a href="signIn.php"><strong>Sign In</strong></a></li>
+                    <?php  
+                    if(isset($_SESSION['role']) && $_SESSION['role'] == "Admin")
+                    {?>
+                        <li><a href="viewUsers.php"><strong>View Users</strong></a></li>
+                    <?php
+                    }else{
+                    }
+                    ?>
+                    <li class="dropdown"><i class="bi bi-chevron-right"></i><script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                        <lord-icon 
+                            src="https://cdn.lordicon.com/hbvyhtse.json"
+                            trigger="hover"
+                            colors="primary:#ffffff"
+                            style="width:40px;height:40px">
+                        </lord-icon>
+                        <ul>
+                        <li><a href="#"><?php
+                                    if(isset($_SESSION['userName'])){
+                                        print "Logged in as:".$_SESSION['userName']."<br><br>";
+                                        print "Status:".$_SESSION['role'];
+                                        ?> 
+                                        <a href="includes/logOut.php"><strong>Log Out</strong></a>
+                                    <?php 
+                                    }else{?>
+                                        <a href="signIn.php">Not logged in</a>
+                                    <?php };
+                                ?></a></li>
+                        </ul>
+                    </li>
                 </ul>
             <div class="dropdown mobile-nav-toggle" style="top: 40px;"><img src="Images/menu.svg" alt="Menu"/> 
                 <ul style="font-family: Poppins;">
@@ -26,8 +58,40 @@
                     <li><a href="testimonials.php">Testimonial</a></li>
                     <li><a href="signUp.php">Sign Up</a></li>
                     <li><a href="signIn.php">Sign In</a></li>
+                    <?php  
+                    if(isset($_SESSION['role']) && $_SESSION['role'] == "Admin")
+                    {?>
+                        <li><a href="viewUsers.php">View Users</a></li>
+                    <?php
+                    }else{
+                    }
+                    ?>
                 </ul>
-              </div>
+            </div>
+
+            <div class="dropdown mobile-nav-toggle" style="top: 40px; right: 50px;"><script src="https://cdn.lordicon.com/bhenfmcm.js"></script> 
+                <li class="dropdown"><i class="bi bi-chevron-right"></i>
+                    <lord-icon 
+                            src="https://cdn.lordicon.com/hbvyhtse.json"
+                            trigger="hover"
+                            colors="primary:#ffffff"
+                            style="width:40px;height:40px">
+                        </lord-icon>
+                        <ul>
+                        <li><a href="#"><?php
+                                    if(isset($_SESSION['userName'])){
+                                        print "Logged in as:".$_SESSION['userName']."<br><br>";
+                                        print "Status:".$_SESSION['role'];
+                                        ?> 
+                                        <a href="includes/logOut.php"><strong>Log Out</strong></a>
+                                    <?php 
+                                    }else{?>
+                                        <a href="signIn.php">Not logged in</a>
+                                    <?php };
+                                ?></a></li>
+                        </ul>
+                </li>
+            </div>
             </nav>
             <div class="faq">
                 <div class="faq-left-desktop">
