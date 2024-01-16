@@ -1,5 +1,6 @@
 <?php
   session_start();
+  die($_SESSION['blogTitle'])
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,6 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="Css/style.css">
     </head>
+    
     <body class="blogPreset">
         <div id="article">
             <nav id="navbar" class="navbar">
@@ -53,16 +55,11 @@
             </nav><br><br>
             <?php include "includes/functions.php"; ?>
             <?php
-            $slug = $url[1] ?? null;
-
-            if($slug)
+            $blogTitle = $_SESSION['blogTitle'];
+            if(isset($_SESSION['blogTitle']))
             { 
-                $url = $_GET['url'] ?? 'home';
-                $url = strtolower($url);
-                $url = explode("/", $url);
-                $blogTitle = esc($row["blogTitle"]);
-                $query = "select * from blogdetails where blogdetails.blogTitle = :blogTitle limit 1";
-                $row = query_row($query,['title'=>$slug]);
+                $query = "select * from blogdetails where blogdetails.blogTitle = $blogTitle";
+                $row = query($query);
             }
                 if(!empty($row))
                 {?>
@@ -87,7 +84,7 @@
                             </div>
                         </a>
                     </div>   
-        </div> 
+                </div> 
                 <?php
                 }else{
                 ?>

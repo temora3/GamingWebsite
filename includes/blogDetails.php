@@ -8,12 +8,21 @@
     </head>
     <body>
         <div class="blog-box">
-                <a href="blogArticle.php">
+                <a href="blogArticle.php" onclick="myFunction()">
                     <div class="blog-box-img">
                         <img src="<?=get_image($row["imagePath"]) ?>" alt="blogImg1">
                     </div>
                     <div class="blog-box-text">
                         <strong><?=esc($row["blogTitle"]) ?></strong>
+                        <script>
+                            function myFunction() {
+                                <?php 
+                                    $blogTitle = $row["blogTitle"];
+                                    $_SESSION["blogTitle"] = $blogTitle;
+                                ?> 
+                            }
+                        </script>
+                       
                         <a href="#"><?=esc($row["blogSubtitle"]) ?></a>
                         <p><?=esc($row["blogText"]) ?></p>
                             <div class="blog-author">

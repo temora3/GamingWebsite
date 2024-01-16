@@ -694,6 +694,7 @@ transition: 0.2s;
 }
 
 #blog{
+  height: 84vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

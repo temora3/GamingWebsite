@@ -15,7 +15,7 @@ if($_SERVER['SERVER_NAME'] == "localhost")
 	define('DBHOST',"localhost");
 }
 
-define('ROOT', 'http://localhost/GamingWebsite');
+define('ROOT', 'http://localhost/GamingWeb');
 define('APP_NAME', "My Blog");
 define('CURRENT_DATE',  date("Y-m-d"));
 

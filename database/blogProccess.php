@@ -12,13 +12,13 @@ if(isset($_POST["blogSubmit"])) {
     $current_time = date('Y-m-d H:i:s');
 
     // Move uploaded images to a folder (adjust the folder path as needed)
-    if (move_uploaded_file($_FILES['blogImage']['tmp_name'], 'D:/Download/htdocs/GamingWebsite/Images/' . $blogImage)){
+    if (move_uploaded_file($_FILES['blogImage']['tmp_name'], 'D:/Download/htdocs/GamingWeb/Images/' . $blogImage)){
         $blogImagePath = 'Images/' . $blogImage;
     }else{
         echo "Failed to move uploaded image";
     };
 
-    if (move_uploaded_file($_FILES['authorImage']['tmp_name'], 'D:/Download/htdocs/GamingWebsite/Images/' . $authorImage)){
+    if (move_uploaded_file($_FILES['authorImage']['tmp_name'], 'D:/Download/htdocs/GamingWeb/Images/' . $authorImage)){
         $authorImagePath = 'Images/' . $authorImage;
     }else{
         echo "Failed to move uploaded image";
