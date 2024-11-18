@@ -1,6 +1,5 @@
 <?php
   session_start();
-  die($_SESSION['blogTitle'])
 ?>
 <!DOCTYPE html>
 <html>
@@ -53,8 +52,31 @@
                 </ul>
               </div>
             </nav><br><br>
-            <?php include "includes/functions.php"; ?>
             <?php
+            // Retrieve the blog_id from the URL parameter
+            $blogId = $_SESSION['blog_id_val'];
+
+            // Fetch detailed information for the selected blog post using the $blogId
+            $valueRet = "SELECT * FROM blogdetails WHERE blog_id = $blogId";
+            $blogDetails = query($valueRet);
+
+            if ($blogDetails) {
+            ?>
+                <div class="blog-box">
+                        <a href="blogArticle.php">
+                            <div class="blog-box-img">
+                                <img src="<?=get_image($blogDetails["imagePath"])?>" alt="blogImg1">
+                            </div>
+            <?} else {
+                echo 'Blog not found.';
+            }
+            ?>
+
+
+
+
+            <!-- <? include "includes/functions.php"; ?>
+            <?
             $blogTitle = $_SESSION['blogTitle'];
             if(isset($_SESSION['blogTitle']))
             { 
@@ -62,8 +84,8 @@
                 $row = query($query);
             }
                 if(!empty($row))
-                {?>
-                   <div class="blog-box">
+                {?> -->
+                   <!-- <div class="blog-box">
                         <a href="blogArticle.php">
                             <div class="blog-box-img">
                                 <img src="<?=get_image($row["imagePath"])?>" alt="blogImg1">
@@ -83,7 +105,7 @@
                                     </div>
                             </div>
                         </a>
-                    </div>   
+                    </div>    -->
                 </div> 
                 <?php
                 }else{

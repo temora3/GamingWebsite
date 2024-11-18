@@ -130,9 +130,12 @@
                 if($rows)
                 {
                 foreach ($rows as $row) {
-                    include 'includes/blogDetails.php';
+                    ?>
+                    <div class="blog-post" onclick="$_SESSION['blog_id_val'] = $row['blog_id'];">
+                        <?php include 'includes/blogDetails.php'; ?>
+                    </div>
+                    <?php
                 }
-
                 }else{
                     ?>
                     <div class ="emptyBlog">No blogs have been uploaded </div>
@@ -141,6 +144,5 @@
                 ?>
             </div>
         </section>
-
     </body>
 </html>

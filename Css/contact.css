@@ -85,7 +85,7 @@
      
     }
     .submitForm{
-      display: block;
+      display:flex;
     }
   
     .contact {

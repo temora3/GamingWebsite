@@ -1,68 +1,66 @@
 <?php
-  session_start();
-?>
-<?php
-    require_once "myDatabase.php";
+session_start();
+require_once "myDatabase.php";
 
-    $email = $_POST["userEmail"];
-    $password = $_POST["userPassword"];
+$email = $_POST["userEmail"];
+$password = $_POST["userPassword"];
 
-    $_SESSION['userEmail'] = $email;
+$_SESSION['userEmail'] = $email;
 
-    // Prepare the SQL statement
-    $select_data = "SELECT * FROM gaming.userdetails WHERE userEmail = '$email'";
+$select_data = $conn->prepare("SELECT * FROM gaming.userdetails WHERE userEmail = ?");
+$select_data->bind_param("s", $email); // Bind the email parameter
+$select_data->execute();
+$result = $select_data->get_result();
 
-    // Execute the query
-    $result = $conn->query($select_data);
+if (isset($_POST['submit'])) {
+    $_SESSION['userEmail'] = $email; 
 
-    if (isset($_POST['submit'])) {
-        $_SESSION['userEmail'] = $email; 
-    
-        // Query the database to get the user's name
-        $query = "SELECT * FROM userDetails WHERE userEmail = '$email'";
-        $nameQuery = mysqli_query($conn, $query);
-        $userName = mysqli_fetch_array($nameQuery);
-        $savedName = $userName['userName'];
-    
-        $query2 = "SELECT * FROM userDetails WHERE userEmail = '$email'";
-        $roleValue = $conn->query($query2);
-        $userRole =  mysqli_fetch_array($roleValue);
-        $savedRoleValue = $userRole['roleId'];
-    
-        $sql = "SELECT * FROM roles where  roleId = '$savedRoleValue'";
-        $roleText = $conn->query($sql);
-        $role = mysqli_fetch_array($roleText);
-        $savedRole = $role['role'];
-        
-    
-        if (isset($savedRole)){
-            // Store the user type in the session
-            $_SESSION['userName'] = $savedName;
-            $_SESSION['role'] = $savedRole;
-        }
+    $nameQuery = $conn->prepare("SELECT userName FROM userDetails WHERE userEmail = ?");
+    $nameQuery->bind_param("s", $email);
+    $nameQuery->execute();
+    $userName = $nameQuery->get_result()->fetch_assoc();
+    $savedName = $userName['userName'];
+
+    $roleQuery = $conn->prepare("SELECT roleId FROM userDetails WHERE userEmail = ?");
+    $roleQuery->bind_param("s", $email);
+    $roleQuery->execute();
+    $userRole = $roleQuery->get_result()->fetch_assoc();
+    $savedRoleValue = $userRole['roleId'];
+
+    $roleTextQuery = $conn->prepare("SELECT role FROM roles WHERE roleId = ?");
+    $roleTextQuery->bind_param("s", $savedRoleValue);
+    $roleTextQuery->execute();
+    $role = $roleTextQuery->get_result()->fetch_assoc();
+    $savedRole = $role['role'];
+
+    if (isset($savedRole)) {
+        $_SESSION['userName'] = $savedName;
+        $_SESSION['role'] = $savedRole;
     }
-    else{
-        $_SESSION['role']  = null;
-    }
+} else {
+    $_SESSION['role'] = null;
+}
 
-    if ($result->num_rows > 0) {
-        // Fetch the row as an associative array
-        $row = $result->fetch_assoc();
-        // Verify the password
-        if ($password == $row['userPassword']){
-            // Password is correct
-        if(isset($_SESSION['userName'])){
+if ($result->num_rows > 0) {
+
+    $row = $result->fetch_assoc();
+
+    if (password_verify($password, $row['userPassword'])) {
+
+        if (isset($_SESSION['userName'])) {
             header("Location: ../index.php");
             exit();
-            }
-        } else {
-            // Password is incorrect
-            print "Incorrect password\n";
         }
     } else {
-        // No matching email found
-        echo "Email not found";
+        echo "Incorrect password";
     }
+} else {
+    echo "Email not found";
+}
 
-    
+$select_data->close();
+$nameQuery->close();
+$roleQuery->close();
+$roleTextQuery->close();
+$conn->close();
 ?>
