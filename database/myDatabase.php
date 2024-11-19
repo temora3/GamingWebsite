@@ -6,7 +6,7 @@ try {
     // Define the database connection parameters
     $dsn = "sqlsrv:server=tcp:nexus-server-sql.database.windows.net,1433;Database=nexusgaming-database";
     $username = "rat3mo";
-    $password = "{your_password_here}";
+    $password = "Aur0ratriad@5720";
 
     // Create a PDO instance and set attributes for error handling
     $conn = new PDO($dsn, $username, $password);
