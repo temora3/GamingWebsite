@@ -3,15 +3,19 @@
 $dbConnectionString = getenv('gaming'); // Ensure 'gaming' is set in your environment
 
 try {
-    // Create the PDO instance
-    $db = new PDO($dbConnectionString);
+    // Define the database connection parameters
+    $dsn = "sqlsrv:server=tcp:nexus-server-sql.database.windows.net,1433;Database=nexusgaming-database";
+    $username = "rat3mo";
+    $password = "{your_password_here}";
 
-    // Set PDO error mode to exception for better error handling
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // Create a PDO instance and set attributes for error handling
+    $conn = new PDO($dsn, $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    echo "Database connection successful!";
+    echo "Connected successfully to SQL Server!";
 } catch (PDOException $e) {
     // Handle connection errors
-    die("Connection error: " . $e->getMessage());
+    echo "Error connecting to SQL Server: " . $e->getMessage();
+    die();
 }
 ?>
