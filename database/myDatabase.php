@@ -1,19 +1,17 @@
 <?php
-//constants
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "gaming";
+// Get the database connection string from environment variables
+$dbConnectionString = getenv('gaming'); // Ensure 'gaming' is set in your environment
 
-// create the database connection
-$conn = new mysqli($servername,$username,$password,$dbname);
+try {
+    // Create the PDO instance
+    $db = new PDO($dbConnectionString);
 
-// verify that the db connection 
+    // Set PDO error mode to exception for better error handling
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-if ($conn->connect_error){
-    die("Connection error: " . $conn->connect_error);
-}
-else{
-    printf("Database connection Successful\n");
+    echo "Database connection successful!";
+} catch (PDOException $e) {
+    // Handle connection errors
+    die("Connection error: " . $e->getMessage());
 }
 ?>
