@@ -1,20 +1,17 @@
 <?php
-//constants
-$servername = "nexus-azure-server.mysql.database.azure.com"; // Azure MySQL server hostname
-$username = "rat3mo"; // Azure MySQL username with server name
-$password = "Marindi@12"; // Your Azure MySQL password
-$dbname = "gaming"; // Your database name
-$ssl_ca = "/Users/seanratemo/Downloads/DigiCertGlobalRootCA.crt.pem";
+// Database connection parameters
+$host = "nexus-azure-server.mysql.database.azure.com"; // Replace with your MySQL server name
+$username = "rat3mo@nexus-azure-server";       // Replace with your username
+$password = "Marindi@12";                         // Replace with your password
+$database = "gaming";                    // Replace with your database name
 
-// create the database connection
-$conn = mysqli_init();
-mysqli_ssl_set($conn, NULL, NULL, $ssl_ca, NULL, NULL); // Enable SSL/TLS connection
-mysqli_real_connect($conn, $servername, $username, $password, $dbname, 3306, MYSQLI_CLIENT_SSL);
+// Connect to the MySQL database
+$conn = new mysqli($host, $username, $password, $database);
 
-// verify the db connection
-if (mysqli_connect_errno($conn)) {
-    die("Connection error: " . mysqli_connect_error());
-} else {
-    printf("Database connection Successful\n");
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+
+echo "Connected successfully to the Azure MySQL database!";
 ?>
