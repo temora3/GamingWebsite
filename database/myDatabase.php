@@ -26,7 +26,7 @@ try {
     $conn = new PDO(
         "sqlsrv:server = tcp:nexus-server-sql.database.windows.net,1433; Database = nexusgaming-database", 
         "rat3mo", 
-        "{your_password_here}"
+        "Aur0ratriad@5720"
     );
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
