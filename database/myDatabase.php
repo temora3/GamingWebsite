@@ -1,37 +1,19 @@
 <?php
-$serverName = "nexus-server-sql.database.windows.net";
-$username = "rat3mo";
-$password = "Aur0ratriad@5720";
-$database = "nexusgaming-database";
+//constants
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "gaming";
 
-// Create connection using mysqli
-$conn = mysqli_init();
-mysqli_ssl_set($conn, NULL, NULL, NULL, NULL, NULL);
-mysqli_real_connect(
-    $conn, 
-    $serverName, 
-    $username, 
-    $password, 
-    $database,
-    3306, 
-    MYSQLI_CLIENT_SSL
-);
+// create the database connection
+$conn = new mysqli($servername,$username,$password,$dbname);
 
-if (mysqli_connect_errno()) {
-    die("Connection failed: " . mysqli_connect_error());
+// verify that the db connection 
+
+if ($conn->connect_error){
+    die("Connection error: " . $conn->connect_error);
 }
-
-// If you want to use PDO instead, you can keep the PDO code:
-try {
-    $conn = new PDO(
-        "sqlsrv:server = tcp:nexus-server-sql.database.windows.net,1433; Database = nexusgaming-database", 
-        "rat3mo", 
-        "Aur0ratriad@5720"
-    );
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch (PDOException $e) {
-    print("Error connecting to SQL Server.");
-    die(print_r($e));
+else{
+    printf("Database connection Successful\n");
 }
 ?>
