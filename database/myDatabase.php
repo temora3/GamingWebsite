@@ -1,7 +1,7 @@
 <?php
 //constants
 $servername = "nexus-azure-server.mysql.database.azure.com"; // Azure MySQL server hostname
-$username = "rat3mo@nexus-azure-server"; // Azure MySQL username with server name
+echo $username = "rat3mo"; // Azure MySQL username with server name
 $password = "Marindi@12"; // Your Azure MySQL password
 $dbname = "gaming"; // Your database name
 
