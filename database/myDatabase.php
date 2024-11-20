@@ -18,8 +18,6 @@ try {
 
     // Establish the database connection
     $pdo = new PDO($dsn, $username, $password, $options);
-    
-    echo "Successfully connected to Azure MySQL database!";
 
 } catch(PDOException $e) {
     // Error handling
