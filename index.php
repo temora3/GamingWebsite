@@ -18,9 +18,6 @@
         <link rel="stylesheet" href="Css/style.css">
     </head>
     <body>
-        <?php
-          require_once "includes/dbConnect.php"; 
-        ?>
         <section>
             <div class="background">
                 <div class = "background-overlay">
