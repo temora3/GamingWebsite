@@ -1,6 +1,6 @@
 <?php
-session_start();
 require_once "myDatabase.php";
+session_start();
 
 $email = $_POST["userEmail"];
 $password = $_POST["userPassword"];
