@@ -17,7 +17,9 @@ try {
     ];
 
     // Establish the database connection
-    $pdo = new PDO($dsn, $username, $password, $options);
+    if($pdo = new PDO($dsn, $username, $password, $options)){
+        echo "Connected to database succesfully";
+    };
 
 } catch(PDOException $e) {
     // Error handling
