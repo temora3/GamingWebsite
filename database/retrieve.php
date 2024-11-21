@@ -1,5 +1,7 @@
 <?php
-require_once "myDatabase.php";
+if(require_once "myDatabase.php"){
+    echo "myDatabase.php loaded successfully.";
+};
 session_start();
 
 $email = $_POST["userEmail"];
